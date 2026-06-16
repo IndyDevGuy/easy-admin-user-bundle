@@ -2,7 +2,8 @@
 
 namespace Adeliom\EasyAdminUserBundle\EventListener;
 
-use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
+use Doctrine\Common\EventSubscriber;
+#use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Events;
 use Doctrine\ORM\Mapping\ClassMetadata;
@@ -13,7 +14,7 @@ use Doctrine\ORM\Mapping\ClassMetadata;
  */
 
 #[AsDoctrineListener(Events::loadClassMetadata)]
-class DoctrineMappingListener
+class DoctrineMappingListener implements EventSubscriber
 {
     public function __construct(
         /**
@@ -25,6 +26,13 @@ class DoctrineMappingListener
          */
         private string $resetClass
     ) {
+    }
+
+    public function getSubscribedEvents(): array
+    {
+        return [
+            Events::loadClassMetadata,
+        ];
     }
 
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs): void
