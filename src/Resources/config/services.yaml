@@ -10,8 +10,8 @@ services:
     arguments:
       - '%easy_admin_user.user_class%'
       - '%easy_admin_user.reset_password_class%'
-    tags:
-      - { name: 'doctrine.event_listener', event: 'loadClassMetadata' }
+    #tags:
+    #  - { name: 'doctrine.event_listener', event: 'loadClassMetadata' }
 
   Adeliom\EasyAdminUserBundle\Controller\Security\EasyAdminResetPasswordController:
     autowire: true
